@@ -42,6 +42,11 @@ const renderTodos = () => {
     li.innerHTML = `<span>${todo.text}</span>
     <button>Remove</button>`
 
+    // Toggle completion when clicking the text
+    const span = li.querySelector('span') as HTMLSpanElement;
+    span.addEventListener('click', () => toggleTodo(todo.id));
+
+
     addRemoveButtonListener(li, todo.id)
     todoList.appendChild(li);
   });
@@ -53,6 +58,13 @@ const addRemoveButtonListener = (li: HTMLLIElement, id:number) => {
   const removeButton = li.querySelector('button') as HTMLButtonElement;
   removeButton?.addEventListener('click', () => 
     removeTodo(id));
+}
+
+const toggleTodo = (id: number) => {
+  todos = todos.map(todo =>
+    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  );
+  renderTodos();
 }
 
 const removeTodo = (id:number) => {
