@@ -1,0 +1,19 @@
+name: Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+jobs:
+  world:
+    name: World greeting
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print hello
+      run: echo "hello"
+
+    - name: Print world
+      run: echo "world"
