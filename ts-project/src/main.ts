@@ -5,6 +5,7 @@ interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  dueDate?: string;
 }
 
 let todos: Todo[] = [];
@@ -12,6 +13,7 @@ let todos: Todo[] = [];
 const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement;
 const todoList = document.querySelector('.todo-list') as HTMLUListElement;
+
 
 const addTodo = (text:string) => {
   const newTodo: Todo = {
