@@ -45,15 +45,20 @@ h1 {
 }
 .todo-form {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  flex-direction: column; /* stack inputs and button vertically */
+  gap: 10px; /* space between inputs and button */
 }
-.todo-form input {
-  flex: 1;
+
+.todo-form input[type="text"],
+.todo-form input[type="date"] {
+  width: 100%; /* full width of container */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 .todo-form button {
+  width: 100%;
   padding: 10px;
   border: none;
   background: #28a745;
@@ -72,6 +77,17 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.todo-item small {
+  display: block;
+  font-size: 0.8em;
+  color: #555;
+  margin-top: 3px;
+}
+
+.todo-item.overdue {
+  background-color: #ffe6e6; /* light red background for overdue */
+  border-left: 4px solid red; /* left indicator */
 }
 .todo-item button {
   border: none;

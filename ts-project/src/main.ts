@@ -5,6 +5,7 @@ interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  dueDate?: string;
 }
 
 let todos: Todo[] = [];
@@ -12,12 +13,15 @@ let todos: Todo[] = [];
 const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement;
 const todoList = document.querySelector('.todo-list') as HTMLUListElement;
+const todoDate = document.getElementById('todo-date') as HTMLInputElement;
+
 
 const addTodo = (text:string) => {
   const newTodo: Todo = {
     id: Date.now(),
     text: text,
-    completed: false
+    completed: false,
+    dueDate: todoDate.value ? todoDate.value : undefined
   }
   todos.push(newTodo);
   console.log("check to see if push works: ", todos);
@@ -30,6 +34,7 @@ todoForm.addEventListener('submit', (event:Event) => {
   if (text !== '') {
     addTodo(text)
     todoInput.value = '';
+    todoDate.value = '';
   }
 });
 
@@ -39,8 +44,18 @@ const renderTodos = () => {
   todos.forEach(todo => {
     const li = document.createElement('li');
     li.className = 'todo-item';
-    li.innerHTML = `<span>${todo.text}</span>
+
+    const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed;
+
+    li.innerHTML = `<span>
+    ${todo.text}
+     ${todo.dueDate ? `<small>(Due: ${todo.dueDate})</small>` : ''}
+    </span>
     <button>Remove</button>`
+
+    if (isOverdue) {
+      li.classList.add('overdue');
+    }
 
     // Toggle completion when clicking the text
     const span = li.querySelector('span') as HTMLSpanElement;
