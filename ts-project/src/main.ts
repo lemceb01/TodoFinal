@@ -46,9 +46,16 @@ const renderTodos = () => {
     li.className = 'todo-item';
 
     const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed;
-    
-    li.innerHTML = `<span>${todo.text}</span>
+
+    li.innerHTML = `<span>
+    ${todo.text}
+     ${todo.dueDate ? `<small>(Due: ${todo.dueDate})</small>` : ''}
+    </span>
     <button>Remove</button>`
+
+    if (isOverdue) {
+      li.classList.add('overdue');
+    }
 
     // Toggle completion when clicking the text
     const span = li.querySelector('span') as HTMLSpanElement;
