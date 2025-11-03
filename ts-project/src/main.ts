@@ -34,6 +34,7 @@ todoForm.addEventListener('submit', (event:Event) => {
   if (text !== '') {
     addTodo(text)
     todoInput.value = '';
+    todoDate.value = '';
   }
 });
 
