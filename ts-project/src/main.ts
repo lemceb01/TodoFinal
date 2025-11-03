@@ -44,6 +44,9 @@ const renderTodos = () => {
   todos.forEach(todo => {
     const li = document.createElement('li');
     li.className = 'todo-item';
+
+    const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed;
+    
     li.innerHTML = `<span>${todo.text}</span>
     <button>Remove</button>`
 
