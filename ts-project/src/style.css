@@ -89,13 +89,8 @@ h1 {
   background-color: #ffe6e6; /* light red background for overdue */
   border-left: 4px solid red; /* left indicator */
 }
-.todo-item button {
-  border: none;
-  background: #dc3545;
-  color: #fff;
-  border-radius: 3px;
-  cursor: pointer;
-}
+
+
 
 
 .input-error {
@@ -108,4 +103,38 @@ h1 {
   font-size: 0.9em;
   margin-top: 5px;
   display: none;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.todo-item .toggle-btn {
+  border: none;
+  background: #136ed0;
+  color: white;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.todo-item .toggle-btn:hover {
+  background: #0056b3;
+}
+
+.todo-item .remove-btn {
+  border: none;
+  background: #ca2a3a;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: background 0.2s;
+}
+
+.todo-item .remove-btn:hover {
+  background: #940b19;
 }
