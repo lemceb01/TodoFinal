@@ -47,33 +47,37 @@ const renderTodos = () => {
 
     const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed;
 
-    li.innerHTML = `<span>
+    li.innerHTML = `
+    <span style="${todo.completed ? 'text-decoration: line-through; opacity: 0.6;' : ''}">
     ${todo.text}
      ${todo.dueDate ? `<small>(Due: ${todo.dueDate})</small>` : ''}
     </span>
-    <button>Remove</button>`
+      <div class="todo-actions">
+        <button class="toggle-btn">${todo.completed ? 'Undo' : 'Complete'}</button>
+        <button class="remove-btn">Remove</button>
+      </div>
+      `;
 
     if (isOverdue) {
       li.classList.add('overdue');
     }
+        const toggleButton = li.querySelector('.toggle-btn') as HTMLButtonElement;
+        const removeButton = li.querySelector('.remove-btn') as HTMLButtonElement;
 
-    // Toggle completion when clicking the text
-    const span = li.querySelector('span') as HTMLSpanElement;
-    span.addEventListener('click', () => toggleTodo(todo.id));
+        toggleButton.addEventListener('click', () => toggleTodo(todo.id));
 
-
-    addRemoveButtonListener(li, todo.id)
-    todoList.appendChild(li);
-  });
+        removeButton.addEventListener('click', () => removeTodo(todo.id));
+        todoList.appendChild(li);
+      });
 }
 
 renderTodos();
 
-const addRemoveButtonListener = (li: HTMLLIElement, id:number) => {
-  const removeButton = li.querySelector('button') as HTMLButtonElement;
-  removeButton?.addEventListener('click', () => 
-    removeTodo(id));
-}
+// const addRemoveButtonListener = (li: HTMLLIElement, id:number) => {
+//   const removeButton = li.querySelector('button') as HTMLButtonElement;
+//   removeButton?.addEventListener('click', () => 
+//     removeTodo(id));
+// }
 
 const toggleTodo = (id: number) => {
   todos = todos.map(todo =>
