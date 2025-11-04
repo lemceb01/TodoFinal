@@ -61,15 +61,14 @@ const renderTodos = () => {
     if (isOverdue) {
       li.classList.add('overdue');
     }
+        const toggleButton = li.querySelector('.toggle-btn') as HTMLButtonElement;
+        const removeButton = li.querySelector('.remove-btn') as HTMLButtonElement;
 
-    // Toggle completion when clicking the text
-    const span = li.querySelector('span') as HTMLSpanElement;
-    span.addEventListener('click', () => toggleTodo(todo.id));
+        toggleButton.addEventListener('click', () => toggleTodo(todo.id));
 
-
-    addRemoveButtonListener(li, todo.id)
-    todoList.appendChild(li);
-  });
+        removeButton.addEventListener('click', () => removeTodo(todo.id));
+        todoList.appendChild(li);
+      });
 }
 
 renderTodos();
