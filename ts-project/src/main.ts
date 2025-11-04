@@ -47,11 +47,16 @@ const renderTodos = () => {
 
     const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed;
 
-    li.innerHTML = `<span>
+    li.innerHTML = `
+    <span style="${todo.completed ? 'text-decoration: line-through; opacity: 0.6;' : ''}">
     ${todo.text}
      ${todo.dueDate ? `<small>(Due: ${todo.dueDate})</small>` : ''}
     </span>
-    <button>Remove</button>`
+      <div class="todo-actions">
+        <button class="toggle-btn">${todo.completed ? 'Undo' : 'Complete'}</button>
+        <button class="remove-btn">Remove</button>
+      </div>
+      `;
 
     if (isOverdue) {
       li.classList.add('overdue');
