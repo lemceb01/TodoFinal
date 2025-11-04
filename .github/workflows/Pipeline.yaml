@@ -14,6 +14,9 @@ jobs:
   build:
     name: TypeScript Build Check
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ts-project
 
     steps:
       - name: Checkout repository
