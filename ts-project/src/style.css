@@ -138,3 +138,25 @@ h1 {
 .todo-item .remove-btn:hover {
   background: #940b19;
 }
+
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.filter-buttons button {
+  flex: 1;
+  margin: 0 4px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 6px 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-buttons button:hover {
+  background-color: #5a6268;
+}
