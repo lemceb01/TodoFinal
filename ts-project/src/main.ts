@@ -93,3 +93,18 @@ const removeTodo = (id:number) => {
   todos = todos.filter(todo => todo.id !== id);
   renderTodos();
 }
+
+document.getElementById('show-all')?.addEventListener('click', () => {
+  currentFilter = 'all';
+  renderTodos();
+});
+
+document.getElementById('show-active')?.addEventListener('click', () => {
+  currentFilter = 'active';
+  renderTodos();
+});
+
+document.getElementById('show-completed')?.addEventListener('click', () => {
+  currentFilter = 'completed';
+  renderTodos();
+});
