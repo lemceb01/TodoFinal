@@ -1,19 +1,37 @@
-name: Workflow
+name: CI - Build and Type Check
 
 on:
-  workflow_dispatch:
   push:
     branches:
-    - main
+      - main
+      - feature/*
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  world:
-    name: World greeting
+  build:
+    name: TypeScript Build Check
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ts-project
 
     steps:
-    - name: Print hello
-      run: echo "hello"
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Print world
-      run: echo "world"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Build project (Vite)
+        run: npm run build
