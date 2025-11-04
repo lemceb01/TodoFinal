@@ -10,6 +10,8 @@ interface Todo {
 
 let todos: Todo[] = [];
 
+let currentFilter: 'all' | 'active' | 'completed' = 'all';
+
 const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement;
 const todoList = document.querySelector('.todo-list') as HTMLUListElement;
@@ -41,7 +43,14 @@ todoForm.addEventListener('submit', (event:Event) => {
 const renderTodos = () => {
   todoList.innerHTML = '';
 
-  todos.forEach(todo => {
+  let filteredTodos = todos;
+  if (currentFilter === 'active') {
+    filteredTodos = todos.filter(todo => !todo.completed);
+  } else if (currentFilter === 'completed') {
+    filteredTodos = todos.filter(todo => todo.completed);
+  }
+
+  filteredTodos.forEach(todo => {
     const li = document.createElement('li');
     li.className = 'todo-item';
 
@@ -73,12 +82,6 @@ const renderTodos = () => {
 
 renderTodos();
 
-// const addRemoveButtonListener = (li: HTMLLIElement, id:number) => {
-//   const removeButton = li.querySelector('button') as HTMLButtonElement;
-//   removeButton?.addEventListener('click', () => 
-//     removeTodo(id));
-// }
-
 const toggleTodo = (id: number) => {
   todos = todos.map(todo =>
     todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -90,3 +93,32 @@ const removeTodo = (id:number) => {
   todos = todos.filter(todo => todo.id !== id);
   renderTodos();
 }
+
+const updateActiveFilterButton = (activeButtonId: string) => {
+  const filterButtons = document.querySelectorAll('.filter-buttons button');
+  filterButtons.forEach(btn => {
+    if (btn.id === activeButtonId) {
+      btn.classList.add('active-filter');
+    } else {
+      btn.classList.remove('active-filter');
+    }
+  });
+}
+
+document.getElementById('show-all')?.addEventListener('click', () => {
+  currentFilter = 'all';
+  updateActiveFilterButton('show-all');
+  renderTodos();
+});
+
+document.getElementById('show-active')?.addEventListener('click', () => {
+  currentFilter = 'active';
+  updateActiveFilterButton('show-active');
+  renderTodos();
+});
+
+document.getElementById('show-completed')?.addEventListener('click', () => {
+  currentFilter = 'completed';
+  updateActiveFilterButton('show-completed');
+  renderTodos();
+});
