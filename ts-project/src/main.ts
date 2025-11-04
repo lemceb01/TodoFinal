@@ -73,12 +73,6 @@ const renderTodos = () => {
 
 renderTodos();
 
-// const addRemoveButtonListener = (li: HTMLLIElement, id:number) => {
-//   const removeButton = li.querySelector('button') as HTMLButtonElement;
-//   removeButton?.addEventListener('click', () => 
-//     removeTodo(id));
-// }
-
 const toggleTodo = (id: number) => {
   todos = todos.map(todo =>
     todo.id === id ? { ...todo, completed: !todo.completed } : todo
