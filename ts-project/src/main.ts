@@ -10,6 +10,8 @@ interface Todo {
 
 let todos: Todo[] = [];
 
+let currentFilter: 'all' | 'active' | 'completed' = 'all';
+
 const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement;
 const todoList = document.querySelector('.todo-list') as HTMLUListElement;
@@ -41,7 +43,14 @@ todoForm.addEventListener('submit', (event:Event) => {
 const renderTodos = () => {
   todoList.innerHTML = '';
 
-  todos.forEach(todo => {
+  let filteredTodos = todos;
+  if (currentFilter === 'active') {
+    filteredTodos = todos.filter(todo => !todo.completed);
+  } else if (currentFilter === 'completed') {
+    filteredTodos = todos.filter(todo => todo.completed);
+  }
+
+  filteredTodos.forEach(todo => {
     const li = document.createElement('li');
     li.className = 'todo-item';
 
